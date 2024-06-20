@@ -1,0 +1,72 @@
+﻿@model IEnumerable<QuanLyNhanSu.Models.BaoHiem>
+
+@{
+    ViewData["Title"] = "Quản lý bảo hiểm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card">
+    <h5 class="card-header">Quản lý bảo hiểm</h5>
+    <div style="text-align: right; padding-right: 20px; margin-bottom: 10px;">
+        <label for="filterLoaiBaoHiem" class="form-label">Lọc theo loại bảo hiểm</label>
+        <select id="filterLoaiBaoHiem" class="form-select" style="width: 200px; display: inline-block; margin-left: 10px;">
+            <option value="">Tất cả</option>
+            <option value="Bảo hiểm xã hội">Bảo hiểm xã hội</option>
+            <option value="Bảo hiểm y tế">Bảo hiểm y tế</option>
+            <option value="Bảo hiểm thất nghiệp">Bảo hiểm thất nghiệp</option>
+        </select>
+        <a href="/BaoHiems/Create" class="btn btn-primary" style="margin-left: 20px;">Thêm mới</a>
+    </div>
+    <div class="table-responsive text-nowrap">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Tên nhân viên</th>
+                    <th>Ngày bắt đầu</th>
+                    <th>Ngày kết thúc</th>
+                    <th>Loại bảo hiểm</th>
+                    <th>Hoạt động</th>
+                </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+                @if (Model != null && Model.Count() > 0)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr class="contract-row" data-loai-bao-hiem="@item.LoaiBaoHiem">
+                            <td>@item.MaNhanVienNavigation?.HoTen</td>
+                            <td>@item.NgayBatDau?.ToString("dd/MM/yyyy")</td>
+                            <td>@item.NgayKetThuc?.ToString("dd/MM/yyyy")</td>
+                            <td>@item.LoaiBaoHiem</td>
+                            <td>
+                                <a href="/BaoHiems/Edit/@item.MaBaoHiem" class="btn btn-primary">Sửa</a>
+                                <a href="/BaoHiems/Delete/@item.MaBaoHiem" class="btn btn-danger">Xóa</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const filterLoaiBaoHiemSelect = document.getElementById('filterLoaiBaoHiem');
+
+            filterLoaiBaoHiemSelect.addEventListener('change', function () {
+                const selectedLoaiBaoHiem = this.value;
+                const rows = document.querySelectorAll('.contract-row');
+
+                rows.forEach(row => {
+                    if (selectedLoaiBaoHiem === "" || row.dataset.loaiBaoHiem === selectedLoaiBaoHiem) {
+                        row.style.display = "";
+                    } else {
+                        row.style.display = "none";
+                    }
+                });
+            });
+        });
+    </script>
+}
+

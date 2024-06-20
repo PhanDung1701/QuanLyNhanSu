@@ -1,0 +1,38 @@
+﻿@model QuanLyNhanSu.Models.ChucVu
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-xl">
+        <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Thêm mới chức vụ</h5>
+            </div>
+            <div class="card-body">
+                <form asp-controller="ChucVus" asp-action="Create" method="post">
+                    <div class="mb-3">
+                        <label class="form-label" for="basic-default-fullname">Tên chức vụ</label>
+                        <input type="text" class="form-control" asp-for="TenChucVu" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="defaultSelect" class="form-label">Phòng ban</label>
+                        <select asp-for="MaPhongBan" asp-items="@ViewBag.MaPhongBan" class="form-select" required>
+                            <option></option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="basic-default-fullname">Lương cơ bản</label>
+                        <input type="text" class="form-control" asp-for="LuongCoBan" />
+                    </div>
+                    <div class="form-group">
+                        <a href="/ChucVus/Index" class="btn btn-danger">Quay lại</a>
+                        <button type="submit" class="btn btn-primary">Thêm mới</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

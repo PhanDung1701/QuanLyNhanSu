@@ -1,0 +1,71 @@
+﻿@model IEnumerable<QuanLyNhanSu.Models.HopDong>
+
+@{
+    ViewData["Title"] = "Quản lý hợp đồng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card">
+    <h5 class="card-header">Quản lý hợp đồng</h5>
+    <div style="text-align: right; padding-right: 20px; margin-bottom: 10px;">
+        <label for="filterLoaiHopDong" class="form-label">Lọc theo loại hợp đồng</label>
+        <select id="filterLoaiHopDong" class="form-select" style="width: 200px; display: inline-block; margin-left: 10px;">
+            <option value="">Tất cả</option>
+            <option value="Hợp đồng có hạn">Hợp đồng có thời hạn</option>
+            <option value="Hợp đồng thời vụ">Hợp đồng thời vụ</option>
+            <option value="Hợp đồng không thời hạn">Hợp đồng không thời hạn</option>
+        </select>
+        <a href="/HopDongs/Create" class="btn btn-primary" style="margin-left: 20px;">Thêm mới</a>
+    </div>
+    <div class="table-responsive text-nowrap">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Tên nhân viên</th>
+                    <th>Ngày bắt đầu</th>
+                    <th>Ngày kết thúc</th>
+                    <th>Loại hợp đồng</th>
+                    <th>Hoạt động</th>
+                </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+                @if (Model != null && Model.Count() > 0)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr class="contract-row" data-loai-hop-dong="@item.LoaiHopDong">
+                            <td>@item.MaNhanVienNavigation?.HoTen</td>
+                            <td>@item.NgayBatDau?.ToString("dd/MM/yyyy")</td>
+                            <td>@item.NgayKetThuc?.ToString("dd/MM/yyyy")</td>
+                            <td>@item.LoaiHopDong</td>
+                            <td>
+                                <a href="/HopDongs/Edit/@item.MaHopDong" class="btn btn-primary">Sửa</a>
+                                <a href="/HopDongs/Delete/@item.MaHopDong" class="btn btn-danger">Xóa</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const filterLoaiHopDongSelect = document.getElementById('filterLoaiHopDong');
+
+            filterLoaiHopDongSelect.addEventListener('change', function () {
+                const selectedLoaiHopDong = this.value;
+                const rows = document.querySelectorAll('.contract-row');
+
+                rows.forEach(row => {
+                    if (selectedLoaiHopDong === "" || row.dataset.loaiHopDong === selectedLoaiHopDong) {
+                        row.style.display = "";
+                    } else {
+                        row.style.display = "none";
+                    }
+                });
+            });
+        });
+    </script>
+}

@@ -1,0 +1,45 @@
+﻿@model QuanLyNhanSu.Models.BaoHiem
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-xl">
+        <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Thêm mới bảo hiểm</h5>
+            </div>
+            <div class="card-body">
+                <form asp-controller="BaoHiems" asp-action="Create" method="post">
+                    <div class="mb-3">
+                        <label for="defaultSelect" class="form-label">Tên nhân viên</label>
+                        <select asp-for="MaNhanVien" asp-items="@ViewBag.MaNhanVien" class="form-select" required>
+                            <option></option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="basic-default-fullname">Ngày bắt đầu</label>
+                        <input type="date" class="form-control" asp-for="NgayBatDau" id="NgayBatDau" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="basic-default-fullname">Ngày kết thúc</label>
+                        <input type="date" class="form-control" asp-for="NgayKetThuc" id="NgayKetThuc" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Loại bảo hiểm</label>
+                        <select asp-for="LoaiBaoHiem" class="form-select" required>
+                            <option value="Bảo hiểm xã hội">Bảo hiểm xã hội</option>
+                            <option value="Bảo hiểm y tế">Bảo hiểm y tế</option>
+                            <option value="Bảo hiểm thất nghiệp">Bảo hiểm thất nghiệp</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <a href="/BaoHiems/Index" class="btn btn-danger">Quay lại</a>
+                        <button type="submit" class="btn btn-primary">Thêm mới</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

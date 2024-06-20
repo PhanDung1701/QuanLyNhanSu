@@ -1,0 +1,154 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Nhân Sự Công Ty PTD</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2DhKN1f5I11cz4ErclhjiykzHf2C5osTvP3fXc5k2axhW3Y0BfT3OhbVaoRh6x1yQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .card {
+            margin: 10px;
+        }
+
+            .card h5 {
+                font-size: 18px;
+            }
+
+            .card p {
+                font-size: 14px;
+            }
+
+            .card a {
+                font-size: 14px;
+                color: #007bff;
+            }
+
+                .card a:hover {
+                    text-decoration: underline;
+                }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .header-text {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .card .card-title {
+            display: flex;
+            align-items: center;
+        }
+
+        .card img {
+            width: 80px;
+            height: 80px;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-text">
+            <h1>Ứng Dụng Website</h1>
+            <h2>QUẢN LÝ NHÂN SỰ CÔNG TY PTD</h2>
+            <p>Mọi thông tin liên hệ <a href="#">đội ngũ hỗ trợ</a>.</p>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card border-primary">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <img src="/assets/img/icons/Home/luong.png" alt="Thống Kê Lương">
+                                Thống Kê Lương                          
+                        </h5>
+                        <p class="card-text">Xem danh sách bảng lương</p>
+                        <p>Danh sách tổng hợp bảng lương theo tháng của nhân viên công ty.</p>
+                        <a href="/Luongs/Index">Xem ngay ></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-success">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <img src="/assets/img/icons/Home/Department.png" alt="Chức vụ">
+                            Chức vụ
+                            
+                        </h5>
+                        <p class="card-text">Xem danh sách chức vụ</p>
+                        <p>Danh sách các chức vụ của nhân viên công ty.</p>
+                        <a href="/ChucVus/Index">Xem ngay ></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-warning">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <img src="/assets/img/icons/Home/Department.png" alt="Phòng Ban">
+                            Phòng Ban
+                            
+                        </h5>
+                        <p class="card-text">Xem danh sách phòng ban</p>
+                        <p>Danh sách các phòng ban của nhân viên công ty.</p>
+                        <a href="/PhongBans/Index">Xem ngay ></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-success">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <img src="/assets/img/icons/Home/contract.png" alt="Hợp đồng">
+                            Hợp đồng
+                            
+                        </h5>
+                        <p class="card-text">Danh sách các loại hợp đồng</p>
+                        <p>Danh sách các loại hợp đồng lao động của công ty.</p>
+                        <a href="/HopDongs/Index">Xem ngay ></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-info">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <img src="/assets/img/icons/Home/insurance.png" alt="Bảo Hiểm">
+                            Bảo Hiểm
+                            
+                        </h5>
+                        <p class="card-text">Danh sách các loại bảo hiểm</p>
+                        <p>Danh sách các loại bảo hiểm lao động của công ty.</p>
+                        <a href="/BaoHiems/Index">Xem ngay ></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-secondary">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <img src="/assets/img/icons/Home/staff.png" alt="Nhân viên">
+                            Nhân viên
+                            
+                        </h5>
+                        <p class="card-text">Danh sách nhân viên</p>
+                        <p>Danh sách nhân viên và tình trạng trong công ty.</p>
+                        <a href="/NhanViens/Index">Xem ngay ></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

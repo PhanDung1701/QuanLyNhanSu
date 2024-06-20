@@ -1,0 +1,40 @@
+﻿@model IEnumerable<QuanLyNhanSu.Models.PhongBan>
+
+@{
+    ViewData["Title"] = "Quản lý phòng ban";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <h5 class="card-header">Quản lý phòng ban</h5>
+    <div style="text-align: right; padding-right: 20px;">
+        <a href="/PhongBans/Create" class="btn btn-primary">Thêm mới</a>
+    </div>
+    <div class="table-responsive text-nowrap">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Mã phòng ban</th>
+                    <th>Tên phòng ban</th>
+                    <th>Hoạt động</th>
+                </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+                @if (Model != null && Model.Count() > 0)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <th scope="row">@item.MaPhongBan</th>
+                            <td>@item.TenPhongBan</td>
+                            <td>
+                                <a href="/PhongBans/Edit/@item.MaPhongBan" class="btn btn-primary">Sửa</a>
+                                <a href="/PhongBans/Delete/@item.MaPhongBan" class="btn btn-danger">Xóa</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

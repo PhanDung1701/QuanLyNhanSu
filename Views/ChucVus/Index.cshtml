@@ -1,0 +1,43 @@
+﻿@model IEnumerable<QuanLyNhanSu.Models.ChucVu>
+
+@{
+    ViewData["Title"] = "Quản lý chức vụ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card">
+    <h5 class="card-header">Quản lý chức vụ</h5>
+    <div style="text-align: right; padding-right: 20px;">
+        <a href="/ChucVus/Create" class="btn btn-primary">Thêm mới</a>
+    </div>
+    <div class="table-responsive text-nowrap">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Mã chức vụ</th>
+                    <th>Chức vụ</th>
+                    <th>Phòng ban</th>
+                    <th>Lương cơ bản</th>
+                    <th>Hoạt động</th>
+                </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+                @if (Model != null && Model.Count() > 0)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <th scope="row">@item.MaChucVu</th>
+                            <td>@item.TenChucVu</td>
+                            <td>@item.MaPhongBanNavigation?.TenPhongBan</td>
+                            <td>@item.LuongCoBan</td>
+                            <td>
+                                <a href="/ChucVus/Edit/@item.MaChucVu" class="btn btn-primary">Sửa</a>
+                                <a href="/ChucVus/Delete/@item.MaChucVu" class="btn btn-danger">Xóa</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

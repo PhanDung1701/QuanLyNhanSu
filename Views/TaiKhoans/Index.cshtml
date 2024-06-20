@@ -1,0 +1,46 @@
+﻿@model IEnumerable<QuanLyNhanSu.Models.TaiKhoan>
+
+@{
+    ViewData["Title"] = "Quản lý tài khoản";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <h5 class="card-header">Quản lý tài khoản</h5>
+    <div style="text-align: right; padding-right: 20px;">
+        <a href="/TaiKhoans/Create" class="btn btn-primary">Thêm mới</a>
+    </div>
+    <div class="table-responsive text-nowrap">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Mã tài khoản</th>
+                    <th>Tên nhân viên</th>
+                    <th>Email</th>
+                    <th>Mật khẩu</th>
+                    <th>Quyền truy cập</th>
+                    <th>Hoạt động</th>
+                </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+                @if (Model != null && Model.Count() > 0)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <th scope="row">@item.MaTaiKhoan</th>
+                            <td>@item.MaNhanVienNavigation?.HoTen</td>
+                            <td>@item.Email</td>
+                            <td>@item.MatKhau</td>
+                            <td>@item.MaQuyenNavigation?.TenQuyen</td>
+                            <td>
+                                <a href="/TaiKhoans/Edit/@item.MaTaiKhoan" class="btn btn-primary">Sửa</a>
+                                <a href="/TaiKhoans/Delete/@item.MaTaiKhoan" class="btn btn-danger">Xóa</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

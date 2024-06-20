@@ -1,0 +1,107 @@
+﻿@model QuanLyNhanSu.Models.Luong
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-xl">
+        <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Tính lương nhân viên</h5>
+            </div>
+            <div class="card-body">
+                <form asp-controller="Luongs" asp-action="Edit" asp-route-id="@Model.MaLuong" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="MaLuong" />
+                    <div class="mb-3">
+                        <label asp-for="MaNhanVien" class="form-label">Tên nhân viên</label>
+                        <select asp-for="MaNhanVien" class="form-control" asp-items="ViewBag.MaNhanVien" id="MaNhanVien"></select>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="NgayNhan" class="form-label">Ngày nhận lương</label>
+                        <input asp-for="NgayNhan" class="form-control" />
+                        <span asp-validation-for="NgayNhan" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="MaChucVu" class="form-label">Chức vụ</label>
+                        <select asp-for="MaChucVu" class="form-control" asp-items="ViewBag.MaChucVu" id="MaChucVu"></select>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Thuong" class="form-label">Thưởng</label>
+                        <input asp-for="Thuong" class="form-control" id="Thuong" oninput="calculateTongLuong()" />
+                        <span asp-validation-for="Thuong" class="text-danger"></span>
+                    </div>
+                    <div class=" mb-3">
+                        <label asp-for="KhauTru" class="form-label">Khấu trừ</label>
+                        <input asp-for="KhauTru" class="form-control" id="KhauTru" oninput="calculateTongLuong()" />
+                        <span asp-validation-for="KhauTru" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="TongLuong" class="form-label">Tổng lương</label>
+                        <input asp-for="TongLuong" class="form-control" id="TongLuong" readonly />
+                        <span asp-validation-for="TongLuong" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <a href="/Luongs/Index" class="btn btn-danger">Quay lại</a>
+                        <button type="submit" class="btn btn-primary">Cập nhật</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        let luongCoBan = 0;
+
+        async function fetchLuongCoBan() {
+            const maChucVu = document.getElementById('MaChucVu').value;
+            const response = await fetch(`/Luongs/GetLuongCoBan?maChucVu=${maChucVu}`);
+            const data = await response.json();
+            luongCoBan = parseFloat(data);
+            calculateTongLuong();
+        }
+
+        async function fetchChucVuTuongUng() {
+            const maNhanVien = document.getElementById('MaNhanVien').value;
+            const response = await fetch(`/Luongs/GetChucVuTuongUng?maNhanVien=${maNhanVien}`);
+            const data = await response.json();
+
+            // Clear current options
+            const select = document.getElementById('MaChucVu');
+            select.innerHTML = '';
+
+            // Add new options
+            data.forEach(option => {
+                const opt = document.createElement('option');
+                opt.value = option.value;
+                opt.textContent = option.text;
+                select.appendChild(opt);
+            });
+
+            // Fetch basic salary after updating job position
+            fetchLuongCoBan();
+        }
+
+        function calculateTongLuong() {
+            const thuong = parseFloat(document.getElementById('Thuong').value) || 0;
+            const khauTru = parseFloat(document.getElementById('KhauTru').value) || 0;
+            const tongLuong = luongCoBan + thuong - khauTru;
+            document.getElementById('TongLuong').value = tongLuong;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchChucVuTuongUng();
+        });
+
+        // Attach onchange event to MaNhanVien select
+        document.getElementById('MaNhanVien').addEventListener('change', () => {
+            fetchChucVuTuongUng();
+        });
+    </script>
+}

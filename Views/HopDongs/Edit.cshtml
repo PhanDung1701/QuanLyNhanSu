@@ -1,0 +1,48 @@
+﻿@model QuanLyNhanSu.Models.HopDong
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-xl">
+        <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Chỉnh sửa bảo hiểm</h5>
+            </div>
+            <div class="card-body">
+                <form asp-controller="HopDongs" asp-action="Edit" asp-route-id="@Model.MaHopDong" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="MaHopDong" />
+                    <div class="mb-3">
+                        <label for="defaultSelect" class="form-label">Tên nhân viên</label>
+                        <select asp-for="MaNhanVien" asp-items="@ViewBag.MaNhanVien" class="form-select" required>
+                            <option></option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="basic-default-fullname">Ngày bắt đầu</label>
+                        <input type="date" class="form-control" asp-for="NgayBatDau" id="NgayBatDau" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="basic-default-fullname">Ngày kết thúc</label>
+                        <input type="date" class="form-control" asp-for="NgayKetThuc" id="NgayKetThuc" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Loại hợp đồng</label>
+                        <select asp-for="LoaiHopDong" class="form-select" id="LoaiHopDong" required>
+                            <option value="Hợp đồng có hạn">Hợp đồng có thời hạn hạn</option>
+                            <option value="Hợp đồng thời vụ">Hợp đồng thời vụ</option>
+                            <option value="Hợp đồng không thời hạn">Hợp đồng không thời hạn</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <a href="/HopDongs/Index" class="btn btn-danger">Quay lại</a>
+                        <button type="submit" class="btn btn-primary">Thêm mới</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

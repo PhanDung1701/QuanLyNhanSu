@@ -1,0 +1,30 @@
+﻿@model QuanLyNhanSu.Models.PhongBan
+
+@{
+    ViewData["Title"] = "Sửa phòng ban";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-xl">
+        <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Sửa phòng ban</h5>
+            </div>
+            <div class="card-body">
+                <form asp-controller="PhongBans" asp-action="Edit" asp-route-id="@Model.MaPhongBan" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="MaPhongBan" />
+                    <div class="mb-3">
+                        <label class="form-label" for="basic-default-fullname">Tên phòng ban</label>
+                        <input type="text" class="form-control" asp-for="TenPhongBan" />
+                    </div>
+                    <div class="form-group">
+                        <a href="/PhongBans" class="btn btn-danger">Quay lại</a>
+                        <button type="submit" class="btn btn-primary">Sửa</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
